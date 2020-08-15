@@ -40,13 +40,14 @@ class CalcController {
     this._operation[this._operation.length -1] = value;
   }
 
-  isOperation(value) {
+  isOperator(value) {
     return (['+', '-', '*', '%', '/'].indexOf(value) > -1)
   }
 
   addOperation(value) {
+    console.log('A', value, isNaN(this.getLastOperation()));
     if(isNaN(this.getLastOperation())) {
-      if(this.isOperation(value)) {
+      if(this.isOperator(value)) {
         this.setLastOperation(value);
       } else if(isNaN(value)) {
           console.log(value);
@@ -56,8 +57,12 @@ class CalcController {
       
 
     } else {
-      let newValue = this.getLastOperation().toString() + value.toString();
-      this.setLastOperation(parseInt(newValue));
+      if(this.isOperator(value)) {
+        this._operation.push(value);
+      } else {
+        let newValue = this.getLastOperation().toString() + value.toString();
+        this.setLastOperation(parseInt(newValue));
+      }
     }
     
     console.log(this._operation);
