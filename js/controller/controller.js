@@ -94,7 +94,7 @@ class CalcController {
           this.addOperation(parseInt(e.key));
           break;
         case 'c':
-          if(e.ctrlKey) this.copyToClipboard();
+          if (e.ctrlKey || e.metaKey) this.copyToClipboard();
           break;
       }
     });
